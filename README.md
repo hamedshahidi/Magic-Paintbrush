@@ -8,4 +8,10 @@ Dream Makers
 
 Game for kids, range (3-7 years old)
 
+Game Development:
+-Unity
+-C sharp
+-SQL database
+
+
 
