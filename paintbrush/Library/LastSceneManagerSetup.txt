@@ -1,0 +1,5 @@
+sceneSetups:
+- path: C:/Users/austi/AppData/Local/Temp/Temp2_Magic-Paintbrush-master.zip/Magic-Paintbrush-master/Assets/Magic
+    Paint Brush.unity
+  isLoaded: 1
+  isActive: 1
