@@ -27,6 +27,9 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private bool airControl;
 
+	//for paintbrush projectile
+
+
 
 
 
@@ -59,7 +62,9 @@ public class Player : MonoBehaviour {
 		if (!myAnimator.GetBool ("slide") && (isGrounded || airControl)) {
 			myRigidbody.velocity = new Vector2 (horizontal*movementSpeed, myRigidbody.velocity.y);  //x=-1,y=0
 			myAnimator.SetFloat("speed",Mathf.Abs(horizontal));
+
 		}
+
 
 
 		if (isGrounded && jump) {
@@ -121,5 +126,6 @@ public class Player : MonoBehaviour {
 			}
 		
 		}
+
 
 }
