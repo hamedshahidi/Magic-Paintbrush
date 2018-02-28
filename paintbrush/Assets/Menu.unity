@@ -811,6 +811,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1746952103}
   m_OnClick:
     m_PersistentCalls:
+<<<<<<< HEAD
       m_Calls:
       - m_Target: {fileID: 1213690712}
         m_MethodName: Quit
@@ -823,6 +824,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+=======
+      m_Calls: []
+>>>>>>> f4cd4ae8e52ee2b8986d99d05f8134a6be420af2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1746952103
