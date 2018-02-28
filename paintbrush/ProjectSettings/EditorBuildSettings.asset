@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Menu.unity
+    guid: b3df858e85b603443b5b7bb405d63c43
+  - enabled: 1
+    path: Assets/MagicPaintBrush.unity
+    guid: 3b19fe034029e40b6950114d1a189322
