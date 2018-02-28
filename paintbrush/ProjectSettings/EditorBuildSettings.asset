@@ -9,9 +9,5 @@ EditorBuildSettings:
     path: Assets/Menu.unity
     guid: b3df858e85b603443b5b7bb405d63c43
   - enabled: 1
-<<<<<<< HEAD
-    path: Assets/MagicPaintBrush.unity
-=======
     path: Assets/Magic Paint Brush.unity
->>>>>>> f4cd4ae8e52ee2b8986d99d05f8134a6be420af2
     guid: 3b19fe034029e40b6950114d1a189322
