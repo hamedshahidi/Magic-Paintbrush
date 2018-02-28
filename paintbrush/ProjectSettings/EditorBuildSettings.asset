@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Menu.unity
     guid: b3df858e85b603443b5b7bb405d63c43
-  - enabled: 1
+  - enabled: 0
     path: Assets/MagicPaintBrush.unity
     guid: 3b19fe034029e40b6950114d1a189322
+  - enabled: 1
+    path: Assets/level1.unity
+    guid: 28e36849f0dba6b4198c8bfd3aebb900
+  - enabled: 1
+    path: Assets/level2.unity
+    guid: d5c9e6ac2d703f747adfdd19a9db5e23
+  - enabled: 0
+    path: Assets/MagicPaintbrush1.unity
+    guid: 3429024f1aa7c29449b4d44f4faa666f
