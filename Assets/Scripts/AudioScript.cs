@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioScript : MonoBehaviour {
-	public static AudioClip jump, collectcoin;
+	public static AudioClip jump, collectcoin,bubbling;
 	static AudioSource audioSrc;
 
 
@@ -12,6 +12,7 @@ public class AudioScript : MonoBehaviour {
 	void Start () {
 		jump=Resources.Load<AudioClip>("jump");
 		collectcoin=Resources.Load<AudioClip>("coin");
+		bubbling=Resources.Load<AudioClip>("bubbling");
 		audioSrc = GetComponent<AudioSource> ();
 		
 		
@@ -26,8 +27,8 @@ public class AudioScript : MonoBehaviour {
 		case "coin":
 			audioSrc.PlayOneShot (collectcoin);
 			break;
-		case "life":
-			//audioSrc.PlayOneShot (life);
+		case "bubbling":
+			audioSrc.PlayOneShot (bubbling);
 			break;
 
 		}

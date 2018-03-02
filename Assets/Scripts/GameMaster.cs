@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour {
-	[SerializeField]
-	private int coin;
+	
+	public int coin;
 	public Text cointcounter;
 	private int coinscoint;
+	public 
 
 	// Use this for initialization
 	void Start () {

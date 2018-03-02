@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 	private Rigidbody2D myRigidbody;
@@ -28,6 +29,9 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private bool airControl;
 	GameMaster gm;
+
+	public int lives;
+
 	//AudioScript audioscriptjump;
 	//AudioScript audioscriptcollectcoin;
 
@@ -39,9 +43,11 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		facingRight = true;
+
 		myRigidbody = GetComponent<Rigidbody2D>();
 		myAnimator = GetComponent<Animator> ();
 		gm = GameObject.Find("GameManager").GetComponent<GameMaster> ();
+		lives = 5;
 		//audioscriptjump =GameObject.Find("AudioObject").GetComponent<AudioScript> ();
 		//audioscriptcollectcoin =GameObject.Find("AudioObject").GetComponent<AudioScript>();
 
@@ -95,7 +101,9 @@ public class Player : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Space)){
 			jump = true;
 
-
+		}
+		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+			myAnimator.SetTrigger ("throw");
 		}
 	}
 
@@ -144,11 +152,40 @@ public class Player : MonoBehaviour {
 			Destroy (other.gameObject);
 		}
 		if (other.tag == "life") {
-			gm.coinCollected ();
+			
 			AudioScript.PlaySound ("jump");
 			Destroy (other.gameObject);
 		}
+		if (other.tag == "die") {
+			
+			myAnimator.SetBool ("die", true);
+			lives--;
+
+			if (lives > 0) {
+				
+				StartCoroutine (LateCall());
+
+				} else {
+				
+			}
+			AudioScript.PlaySound ("jump");
+			//Destroy (other.gameObject);
+		}
+
 	}
+
+
+	IEnumerator LateCall()
+	{
+		yield return new WaitForSeconds (2);
+		myAnimator.SetBool ("die", false);
+
+		myRigidbody.MovePosition (new Vector2(10,6));
+
+
+	}
+
+
 
 
 
