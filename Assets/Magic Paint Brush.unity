@@ -4690,7 +4690,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 100.451324, y: -0.24746394}
+  m_Offset: {x: 111.55286, y: -0.24746394}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4699,9 +4699,9 @@ BoxCollider2D:
     adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 290.18195, y: 0.5050721}
+  m_Size: {x: 312.385, y: 0.5050721}
   m_EdgeRadius: 0
 --- !u!4 &221709231
 Transform:
@@ -26529,6 +26529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1287014127}
   - component: {fileID: 1287014126}
+  - component: {fileID: 1287014128}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: gameManager
@@ -26562,6 +26563,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1287014128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1287014125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 606783d98a56aa645a04a6a99e47d7e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1289181267
 GameObject:
   m_ObjectHideFlags: 0
@@ -26633,7 +26645,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -36038,7 +36050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xMax: 400
-  xMin: 26.7
+  xMin: 25.5
   yMax: 18.4
   yMin: 11
 --- !u!1 &1731730248
