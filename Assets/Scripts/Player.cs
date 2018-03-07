@@ -29,6 +29,8 @@ public class Player : MonoBehaviour {
 	[SerializeField]
 	private bool airControl;
 	GameMaster gm;
+	public GameObject Loading;
+	//public GameObject Paused;
 
 	public int lives;
 
@@ -105,6 +107,7 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			myAnimator.SetTrigger ("throw");
 		}
+			
 	}
 
 	private void Flip(float horizontal){
@@ -151,10 +154,11 @@ public class Player : MonoBehaviour {
 			AudioScript.PlaySound ("coin");
 			Destroy (other.gameObject);
 		}
-		if (other.tag == "life") {
+		if (other.tag == "endLevel") {
 			
-			AudioScript.PlaySound ("jump");
-			Destroy (other.gameObject);
+				Loading.SetActive (true);
+				StartCoroutine (coolDown());
+
 		}
 		if (other.tag == "die") {
 			
@@ -184,7 +188,14 @@ public class Player : MonoBehaviour {
 
 
 	}
+	IEnumerator coolDown()
+	{
+		yield return new WaitForSeconds (1);
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
 
+
+
+	}
 
 
 
