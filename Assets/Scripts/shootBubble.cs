@@ -24,6 +24,15 @@ public class shootBubble : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnter2D(Collider2D other){
+		if (other.tag == "coin") {
+			
+			Destroy (other.gameObject);
+		}
+
+
+	}
+
 	IEnumerator CanShoot()
 	{
 		canShoot = false;

@@ -5,13 +5,21 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
-	private Rigidbody2D myRigidbody;
+	
+	private Player instance;
+	public Player Instance{
+		get{
+			if(instance==null)
+			return instance;
+		}
+	}
+
 	private Animator myAnimator;
 
 	[SerializeField]
 	private float movementSpeed;
 	private bool facingRight;
-	private bool slide;
+
 
 	[SerializeField]
 	private Transform[] groundPoints;
@@ -21,31 +29,35 @@ public class Player : MonoBehaviour {
 
 	[SerializeField]
 	private LayerMask whatIsGround;
-	private bool isGrounded;
-	private bool jump;
-	private bool land;
-	[SerializeField]
-	private float jumpForce;
 	[SerializeField]
 	private bool airControl;
+
+
+
+	[SerializeField]
+	private float jumpForce;
+
 	GameMaster gm;
 
 	public int lives;
 
-	//AudioScript audioscriptjump;
-	//AudioScript audioscriptcollectcoin;
+	private Rigidbody2D MyRigidbody{ get; set;}
 
+	public bool Attack{get;set;}
 
+	public bool Slide{get;set;}
 
+	public bool Jump{get;set;}
 
-
+	public bool OnGround{get;set;}
 
 	// Use this for initialization
 	void Start () {
 		facingRight = true;
 
-		myRigidbody = GetComponent<Rigidbody2D>();
+		MyRigidbody = GetComponent<Rigidbody2D>();
 		myAnimator = GetComponent<Animator> ();
+
 		gm = GameObject.Find("GameManager").GetComponent<GameMaster> ();
 		lives = 5;
 		//audioscriptjump =GameObject.Find("AudioObject").GetComponent<AudioScript> ();
@@ -61,7 +73,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		float horizontal = Input.GetAxis ("Horizontal");
-		isGrounded = IsGrounded ();
+		OnGround = IsGrounded ();
 		HandleInput ();
 		HandleMovement(horizontal);
 		Flip (horizontal);
@@ -69,37 +81,27 @@ public class Player : MonoBehaviour {
 
 		HandleLayers ();
 
-		ResetValues ();
 
 		
 	}
 	private void HandleMovement(float horizontal){
-		if (!myAnimator.GetBool ("slide") && (isGrounded || airControl)) {
-			myRigidbody.velocity = new Vector2 (horizontal*movementSpeed, myRigidbody.velocity.y);  //x=-1,y=0
-			myAnimator.SetFloat("speed",Mathf.Abs(horizontal));
-		}
-
-
-		if (isGrounded && jump) {
-			isGrounded = false;
-			myRigidbody.AddForce (new Vector2(0,jumpForce));
-			myAnimator.SetTrigger ("jump");
-
-			AudioScript.PlaySound ("jump");
+		if (MyRigidbody.velocity.y < 0) {
 			myAnimator.SetBool ("land",true);
 		}
-		if (slide && !this.myAnimator.GetCurrentAnimatorStateInfo (0).IsName ("Slide")) {
-			myAnimator.SetBool ("slide", true);
-		}else if(!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName ("Slide")){
-			myAnimator.SetBool ("slide", false);
+		if (!Attack && !Slide && (OnGround || airControl)) {
+			//MyRigidbody.velocity = new Vector2 (horizontal * movementSpeed, myAnimator.velocity.y);
 		}
+		if (Jump && MyRigidbody.velocity.y==0) {
+			MyRigidbody.AddForce (new Vector2 (0, jumpForce));
+		}
+		myAnimator.SetFloat ("speed", Mathf.Abs (horizontal));
 	}
 	private void HandleInput(){
 		if (Input.GetKeyDown (KeyCode.LeftControl)) {
-			slide = true;
+			
 		}
 		if(Input.GetKeyDown(KeyCode.Space)){
-			jump = true;
+			
 
 		}
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
@@ -116,18 +118,15 @@ public class Player : MonoBehaviour {
 			transform.localScale = theScale;
 		}
 	}
-	private void ResetValues(){
-		slide = false;
-		jump = false;
-	}
+
 
 	private bool IsGrounded(){
-		if (myRigidbody.velocity.y <= 0) {
+		if (MyRigidbody.velocity.y <= 0) {
 			foreach(Transform point in groundPoints){
 				Collider2D[] colliders = Physics2D.OverlapCircleAll (point.position, groundRadius, whatIsGround);
 				for (int i = 0; i < colliders.Length; i++) {
 					if (colliders [i].gameObject != gameObject) {
-						myAnimator.ResetTrigger ("jump");
+						
 
 						return true;
 					}
@@ -137,7 +136,7 @@ public class Player : MonoBehaviour {
 		return false;
 	}
 	private void HandleLayers(){
-		if (!isGrounded) {
+		if (!OnGround) {
 			myAnimator.SetLayerWeight (1, 1);
 		}else{
 			myAnimator.SetLayerWeight (1, 0);
@@ -156,7 +155,8 @@ public class Player : MonoBehaviour {
 			AudioScript.PlaySound ("jump");
 			Destroy (other.gameObject);
 		}
-		if (other.tag == "die") {
+
+		if (other.tag == "die" || other.tag == "Enemies") {
 			
 			myAnimator.SetBool ("die", true);
 			lives--;
@@ -180,7 +180,7 @@ public class Player : MonoBehaviour {
 		yield return new WaitForSeconds (2);
 		myAnimator.SetBool ("die", false);
 
-		myRigidbody.MovePosition (new Vector2(10,6));
+		MyRigidbody.MovePosition (new Vector2(0,0));
 
 
 	}
