@@ -301,6 +301,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0.7074428, w: 0.7067706}
   m_LocalPosition: {x: 0.01, y: 0.02, z: 0}
   m_LocalScale: {x: 0.3922348, y: 0.3871165, z: 1.034812}
+<<<<<<< HEAD
   m_Children:
   - {fileID: 2122752467}
   - {fileID: 1238231778}
@@ -610,6 +611,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+=======
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.054}
+>>>>>>> 41dd23dd2d157aaad55530e5984f86ee544da640
 --- !u!1 &1688230953
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,6 +683,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1688230953}
+<<<<<<< HEAD
   m_LocalRotation: {x: 0.8588479, y: 0.51108235, z: -0.029458826, w: -0.017530328}
   m_LocalPosition: {x: -6.74, y: 0.22, z: 0.09}
   m_LocalScale: {x: 1.9433992, y: 1.9433992, z: 1.9153051}
@@ -816,3 +824,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.8
+=======
+  m_LocalRotation: {x: 0.8572434, y: 0.506748, z: 0.013958831, w: -0.09025177}
+  m_LocalPosition: {x: -5.66, y: 0.15, z: 0.9}
+  m_LocalScale: {x: 1.8686532, y: 1.8686532, z: 1.8416396}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -9.723001, y: -176.07101, z: -241.512}
+>>>>>>> 41dd23dd2d157aaad55530e5984f86ee544da640

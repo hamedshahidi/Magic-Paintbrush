@@ -6,7 +6,11 @@ public class wheel : MonoBehaviour {
 
     public float maxspeed = 500f;
     public float minspeed = 100f;
+<<<<<<< HEAD
     public static float speed;
+=======
+    float speed;
+>>>>>>> 41dd23dd2d157aaad55530e5984f86ee544da640
     private float position = 0.0f;
 	private float initradius = 4.75f;
 	private float minradius = 4f;
