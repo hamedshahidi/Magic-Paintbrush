@@ -15,6 +15,7 @@ TagManager:
   - Brush
   - trashbin
   - garbages
+  - edge
   layers:
   - Default
   - TransparentFX
