@@ -57,7 +57,7 @@ public class ViewController : MonoBehaviour {
 				smallBigMonster.SetActive (true);
 				StartCoroutine(coolDown());
 
-				StartCoroutine(coolDown());
+
 
 
 				//StartCoroutine(coolDown());

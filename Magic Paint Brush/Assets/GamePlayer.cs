@@ -111,7 +111,7 @@ public class GamePlayer : MonoBehaviour {
 
 		if (IsGrounded() && jump) {
 			isGrounded = false;
-			myRigidbody.AddForce (new Vector2(0,430));
+			myRigidbody.AddForce (new Vector2(0,500));
 			myAnimator.SetTrigger ("jump");
 			myAnimator.SetBool ("land", true);
 
@@ -137,7 +137,7 @@ public class GamePlayer : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			myAnimator.SetTrigger ("throw");
 			AudioScript.PlaySound ("bubbling");
-			Throwbubble (0);
+			Throwbubble ();
 		}
 	}
 
@@ -184,8 +184,8 @@ public class GamePlayer : MonoBehaviour {
 		}
 
 	}
-	public void Throwbubble(int value){
-		if (!isGrounded && value == 1 || isGrounded && value == 0) {
+	public void Throwbubble(){
+		if (!isGrounded|| isGrounded) {
 			if (facingRight) {
 				GameObject tmp=(GameObject)Instantiate (bubbleprefab, transform.position, Quaternion.identity);
 				tmp.GetComponent<shootBubble> ().Initialize (Vector2.right);
@@ -294,9 +294,6 @@ public class GamePlayer : MonoBehaviour {
 	{
 		yield return new WaitForSeconds (2);
 		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
-
-
-
 	}
 
 

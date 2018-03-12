@@ -9,19 +9,27 @@ public class shootBubble : MonoBehaviour {
 	private float speed;
 	private Rigidbody2D myRidigbody;
 	private Vector2 direction;
+	private bool shoot;
+	public GameObject bubble;
 
 
 	// Use this for initialization
 	void Start () {
+		shoot = true;
 		myRidigbody = GetComponent<Rigidbody2D>();
 
-		
+
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if (shoot) {
+			StartCoroutine (coolDown ());
+		} else {
+			Destroy (bubble);
 
-		myRidigbody.velocity = direction * speed;
+		}
+
 
 	}
 	public void Initialize(Vector2 direction){
@@ -33,9 +41,10 @@ public class shootBubble : MonoBehaviour {
 
 		if (other.tag == "die") {
 			
-			Destroy (other.gameObject);
-			AudioScript.PlaySound ("coin");
 
+			AudioScript.PlaySound ("coin");
+			EnemiesScript.flyEniemies (other.gameObject.GetComponent<Rigidbody2D>());
+			StartCoroutine (waitforEnemyDestroy(other.gameObject));
 
 		}
 
@@ -45,5 +54,21 @@ public class shootBubble : MonoBehaviour {
 	}
 	void OnBecaeInvisible(){
 		Destroy (gameObject);
+	}
+
+	IEnumerator coolDown()
+	{
+		myRidigbody.velocity = direction * speed;
+		yield return new WaitForSeconds (1);
+		shoot = false;
+
+	}
+
+	IEnumerator waitforEnemyDestroy(GameObject other)
+	{
+		
+		yield return new WaitForSeconds (1);
+		Destroy(other.gameObject);
+
 	}
 }
