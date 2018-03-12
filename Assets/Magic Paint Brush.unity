@@ -12912,7 +12912,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
+<<<<<<< HEAD
   m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+=======
+  m_Color: {r: 0, g: 0, b: 0, a: 0.21}
+>>>>>>> 8f2117b00ff7e46c586c248224d3f915621b25ad
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -42276,7 +42280,10 @@ GameObject:
   - component: {fileID: 1893327642}
   - component: {fileID: 1893327643}
   - component: {fileID: 1893327641}
+<<<<<<< HEAD
   - component: {fileID: 1893327644}
+=======
+>>>>>>> 8f2117b00ff7e46c586c248224d3f915621b25ad
   m_Layer: 5
   m_Name: PAUSE MENU
   m_TagString: Untagged
@@ -42296,7 +42303,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
+<<<<<<< HEAD
   m_Color: {r: 0, g: 0, b: 0, a: 0.39215687}
+=======
+  m_Color: {r: 0, g: 0, b: 0, a: 0.303}
+>>>>>>> 8f2117b00ff7e46c586c248224d3f915621b25ad
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -42339,6 +42350,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1893327640}
+<<<<<<< HEAD
 --- !u!95 &1893327644
 Animator:
   serializedVersion: 3
@@ -42356,6 +42368,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+=======
+>>>>>>> 8f2117b00ff7e46c586c248224d3f915621b25ad
 --- !u!1 &1894533788
 GameObject:
   m_ObjectHideFlags: 0
