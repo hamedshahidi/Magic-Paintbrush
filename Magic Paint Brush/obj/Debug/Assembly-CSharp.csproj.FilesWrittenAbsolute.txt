@@ -1,3 +1,7 @@
+/Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/Workshop/Desktop/Magic Paint Brush/obj/Debug/Assembly-CSharp.dll
+/Users/Workshop/Desktop/Magic Paint Brush/obj/Debug/Assembly-CSharp.dll.mdb
 /Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/UnityEngine.dll
 /Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/UnityEditor.dll
 /Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/UnityEngine.UIAutomation.dll
@@ -40,7 +44,3 @@
 /Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/Unity.Cecil.Mdb.dll
 /Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll
 /Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.xml
-/Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/Assembly-CSharp.dll.mdb
-/Users/Workshop/Desktop/Magic Paint Brush/Temp/bin/Debug/Assembly-CSharp.dll
-/Users/Workshop/Desktop/Magic Paint Brush/obj/Debug/Assembly-CSharp.dll
-/Users/Workshop/Desktop/Magic Paint Brush/obj/Debug/Assembly-CSharp.dll.mdb

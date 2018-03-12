@@ -12,6 +12,7 @@ public class BeachPlayerMove : MonoBehaviour {
 
 	void Start () {
 		playeranimatorinbeach=GetComponent<Animator> ();
+		playerbody = GetComponent<Rigidbody2D>();
 
 
 
@@ -21,6 +22,8 @@ public class BeachPlayerMove : MonoBehaviour {
 		switch (action) {
 		case "move":
 			playeranimatorinbeach.SetTrigger ("move");
+			playerbody.velocity = new Vector2 (6*10, playerbody.velocity.y);  //x=-1,y=0
+			playeranimatorinbeach.SetFloat("speed",Mathf.Abs(6));
 			break;
 		case "idle":
 			playeranimatorinbeach.SetTrigger ("idle");

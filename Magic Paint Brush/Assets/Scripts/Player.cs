@@ -38,6 +38,7 @@ public class Player : MonoBehaviour {
 
 	//AudioScript audioscriptjump;
 	//AudioScript audioscriptcollectcoin;
+	private 
 
 
 
@@ -134,7 +135,8 @@ public class Player : MonoBehaviour {
 				for (int i = 0; i < colliders.Length; i++) {
 					if (colliders [i].gameObject != gameObject) {
 						myAnimator.ResetTrigger ("jump");
-
+						myAnimator.ResetTrigger ("throw");
+						myAnimator.SetBool ("land",false);
 						return true;
 					}
 				}

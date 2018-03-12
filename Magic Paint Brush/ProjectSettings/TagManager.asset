@@ -15,6 +15,9 @@ TagManager:
   - Brush
   - trashbin
   - garbages
+  - Paint
+  - breakBigmonster
+  - bigmonster
   layers:
   - Default
   - TransparentFX

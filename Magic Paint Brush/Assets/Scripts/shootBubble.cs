@@ -28,6 +28,21 @@ public class shootBubble : MonoBehaviour {
 		this.direction = direction;
 	
 	}
+
+	void OnTriggerEnter2D(Collider2D other){
+
+		if (other.tag == "die") {
+			
+			Destroy (other.gameObject);
+			AudioScript.PlaySound ("coin");
+
+
+		}
+
+
+
+
+	}
 	void OnBecaeInvisible(){
 		Destroy (gameObject);
 	}

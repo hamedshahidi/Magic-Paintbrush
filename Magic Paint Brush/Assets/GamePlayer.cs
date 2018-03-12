@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GamePlayer : MonoBehaviour {
 
 	private Rigidbody2D myRigidbody;
+
 
 	private Animator myAnimator;
 
@@ -35,6 +37,17 @@ public class GamePlayer : MonoBehaviour {
 	private GameObject bubbleprefab;
 
 	public int lives;
+	private int garbageremain;
+	ViewController viewController;
+	Conversation conversationscript;
+	public GameObject LiangDailogbox;
+	public Text LiangText;
+	float horizontal;
+	public GameObject drawingColliders;
+	private bool fly;
+	GameMaster gm;
+
+
 
 	//AudioScript audioscriptjump;
 	//AudioScript audioscriptcollectcoin;
@@ -46,36 +59,47 @@ public class GamePlayer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
+		
+		garbageremain = 5;
 		facingRight = true;
+		fly = false;
 
+		LiangText.text = "Oh God!! So much Garbages. Let, Clean the beach.\n\nPress   ➡  Key";
 		myRigidbody = GetComponent<Rigidbody2D>();
 		myAnimator = GetComponent<Animator> ();
-		//gm = GameObject.Find("GameManager").GetComponent<GameMaster> ();
-		//gm = GameObject.Find ("endLevel").GetComponent<GameMaster> ();
+		conversationscript=GetComponent<Conversation> ();
+	
 		lives = 5;
+		viewController=GetComponent<ViewController>();
+		gm = GameObject.Find("GameManager").GetComponent<GameMaster> ();
+
+
 		//audioscriptjump =GameObject.Find("AudioObject").GetComponent<AudioScript> ();
 		//audioscriptcollectcoin =GameObject.Find("AudioObject").GetComponent<AudioScript>();
 
 
 
 	}
-	void Update(){
 
-	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		float horizontal = Input.GetAxis ("Horizontal");
-		isGrounded = IsGrounded ();
+		horizontal = Input.GetAxis ("Horizontal");
 		HandleInput ();
+		isGrounded = IsGrounded ();
+
 		HandleMovement(horizontal);
 		Flip (horizontal);
 
 
 		HandleLayers ();
-
+		myAnimator.SetBool ("land", false);
 		ResetValues ();
 
+		if (SceneManager.GetActiveScene ().name.Equals("Level 1")) {
+			LiangText.text = "WHERE AM I!!!";
+		}
 
 	}
 	private void HandleMovement(float horizontal){
@@ -85,13 +109,14 @@ public class GamePlayer : MonoBehaviour {
 		}
 
 
-		if (isGrounded && jump) {
+		if (IsGrounded() && jump) {
 			isGrounded = false;
-			myRigidbody.AddForce (new Vector2(0,jumpForce));
+			myRigidbody.AddForce (new Vector2(0,430));
 			myAnimator.SetTrigger ("jump");
+			myAnimator.SetBool ("land", true);
 
 			AudioScript.PlaySound ("jump");
-			myAnimator.SetBool ("land",true);
+
 		}
 		if (slide && !this.myAnimator.GetCurrentAnimatorStateInfo (0).IsName ("Slide")) {
 			myAnimator.SetBool ("slide", true);
@@ -102,13 +127,16 @@ public class GamePlayer : MonoBehaviour {
 	private void HandleInput(){
 		if (Input.GetKeyDown (KeyCode.LeftControl)) {
 			slide = true;
+			fly = true;
 		}
 		if(Input.GetKeyDown(KeyCode.Space)){
+			myAnimator.SetTrigger ("jump");
 			jump = true;
 
 		}
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			myAnimator.SetTrigger ("throw");
+			AudioScript.PlaySound ("bubbling");
 			Throwbubble (0);
 		}
 	}
@@ -120,6 +148,9 @@ public class GamePlayer : MonoBehaviour {
 			Vector3 theScale = transform.localScale;
 			theScale.x *= -1;
 			transform.localScale = theScale;
+
+			LiangText.rectTransform.localScale = new Vector3(LiangText.rectTransform.localScale.x*-1,LiangText.rectTransform.localScale.y,LiangText.rectTransform.localScale.z);
+
 		}
 	}
 	private void ResetValues(){
@@ -134,6 +165,8 @@ public class GamePlayer : MonoBehaviour {
 				for (int i = 0; i < colliders.Length; i++) {
 					if (colliders [i].gameObject != gameObject) {
 						myAnimator.ResetTrigger ("jump");
+						myAnimator.SetBool ("land", false);
+					
 
 						return true;
 					}
@@ -165,14 +198,93 @@ public class GamePlayer : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D other){
 		
+			if (other.tag == "Brush") {
+				StartCoroutine(MoreInfo());
+				Destroy (other.gameObject);
+				AudioScript.PlaySound ("coin");
+			drawingColliders.SetActive (true);
+
+			}
+			if (other.tag == "garbages") {
+
+				Destroy (other.gameObject);
+			garbageremain = garbageremain - 1;
+			AudioScript.PlaySound ("coin");
+			if (garbageremain == 0) {
+				viewController.HandleView ("trashbin");
+				}
+			}
+		if (other.tag == "trashbin") {
+			Destroy (other.gameObject);
+			StartCoroutine(StartConversation());
+			AudioScript.PlaySound ("coin");
+
+		}
+		if (other.tag == "Paint") {
+			if (fly) {
+				
+				viewController.HandleView ("Drawing");
+				AudioScript.PlaySound ("jump");
+				fly = false;
+			}
+		}
+		if (other.tag == "coin") {
+			gm.coinCollected ();
+			AudioScript.PlaySound ("coin");
+			Destroy (other.gameObject);
+		}
+		if (other.tag == "life") {
+
+			AudioScript.PlaySound ("jump");
+			Destroy (other.gameObject);
+		}
+		if (other.tag == "endLevel") {
+
+			StartCoroutine (coolDown());
+
+		}
+		if (other.tag == "die") {
+
+			myAnimator.SetBool ("die", true);
+			lives--;
+
+			if (lives > 0) {
+
+				StartCoroutine (LateCall());
+
+			} else {
+				myRigidbody.MovePosition (new Vector2(10,6));
+			}
+			AudioScript.PlaySound ("jump");
+			//Destroy (other.gameObject);
+		}
+			
+
+		
+
+	}
+	IEnumerator StartConversation()
+	{
+		yield return new WaitForSeconds (2);
+		viewController.HandleView ("Mermaid");
+		conversationscript.ShowConversation ();
+
+
+	}
+	IEnumerator MoreInfo()
+	{
+		yield return new WaitForSeconds (2);
+		conversationscript.ShowMoreInfo();
+
 
 	}
 
 
 	IEnumerator LateCall()
-	{
+	{	myAnimator.SetBool ("die", false);
 		yield return new WaitForSeconds (2);
-		myAnimator.SetBool ("die", false);
+
+		myAnimator.SetBool ("idle", true);
 
 		myRigidbody.MovePosition (new Vector2(10,6));
 
