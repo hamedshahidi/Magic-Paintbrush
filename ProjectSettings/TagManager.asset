@@ -8,6 +8,10 @@ TagManager:
   - gameManager
   - life
   - die
+  - liferw
+  - doublejumprw
+  - coinrw
+  - shieldrw
   layers:
   - Default
   - TransparentFX
