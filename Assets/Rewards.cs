@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rewards : MonoBehaviour {
+public class Rewards : MonoBehaviour
+{
 
     private int rewardpointer = 1;
     private static int reward = 1;
- 
-	void Update ()
+
+    void Update()
     {
-        if (wheel.speed > 0f)
+        if (Wheel.speed > 0f)
         {
             reward = rewardpointer;
         }
- 	}
+    }
 
     private void OnTriggerEnter2D(Collider2D pointer)
     {
@@ -34,4 +35,4 @@ public class Rewards : MonoBehaviour {
             rewardpointer = 4;
         }
     }
- }
+}

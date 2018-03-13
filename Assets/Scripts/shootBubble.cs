@@ -2,34 +2,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+
 public class shootBubble : MonoBehaviour {
-	public GameObject projectile;
-	public Vector2 velocity;
-	public bool canShoot=true;
-	public Vector2 offset = new Vector2 (0.4f,0.1f);
-	public float coolDown=1f;
+	[SerializeField]
+	private float speed;
+	private Rigidbody2D myRidigbody;
+	private Vector2 direction;
+	private bool shoot;
+	public GameObject bubble;
+	[SerializeField]
+	private GameObject bubbleprefab;
+
+	public GameObject bubbleanimationObject;
+
+
 
 	// Use this for initialization
 	void Start () {
-		
+		shoot = true;
+		myRidigbody = GetComponent<Rigidbody2D>();
+
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown (KeyCode.LeftShift) && canShoot) {
-			GameObject go=Instantiate (projectile,(Vector2) transform.position + offset * transform.localScale.x, Quaternion.identity);
-			go.GetComponent<Rigidbody2D> ().velocity = new Vector2 (velocity.x*transform.localScale.x+4,velocity.y);
-			AudioScript.PlaySound ("bubbling");
-			StartCoroutine (CanShoot());
+	void FixedUpdate () {
+		if (shoot) {
+			StartCoroutine (coolDown ());
+		} else {
+			Destroy (bubble);
+
 		}
+
+
+	}
+	public void Initialize(Vector2 direction){
+		this.direction = direction;
+	
 	}
 
-	IEnumerator CanShoot()
-	{
-		canShoot = false;
-		yield return new WaitForSeconds (1);
-		canShoot = true;
+	void OnTriggerEnter2D(Collider2D other){
 
+		if (other.tag == "makefree") {
+
+			AudioScript.PlaySound ("coin");
+			//Destroy (other.gameObject);
+			other.gameObject.GetComponent<Rigidbody2D>().gravityScale=-1;
+			other.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+			other.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+
+			//GameObject tmp=(GameObject)Instantiate (bubbleprefab, transform.position, Quaternion.identity);
+			//tmp.GetComponent<shootBubble> ().Initialize (Vector2.down);
+
+
+
+		}
+
+
+
+
+	}
+	void OnBecaeInvisible(){
+		Destroy (gameObject);
+	}
+
+	IEnumerator coolDown()
+	{
+		myRidigbody.velocity = direction * speed;
+		yield return new WaitForSeconds (1);
+	
+		shoot = false;
+
+	}
+
+	IEnumerator waitforEnemyDestroy(GameObject other)
+	{
+		
+		yield return new WaitForSeconds (2);
+		Destroy(other.gameObject);
 
 	}
 }

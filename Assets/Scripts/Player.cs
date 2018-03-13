@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 	private Rigidbody2D myRigidbody;
+
 	private Animator myAnimator;
 
 	[SerializeField]
@@ -30,10 +31,14 @@ public class Player : MonoBehaviour {
 	private bool airControl;
 	GameMaster gm;
 
+	[SerializeField]
+	private GameObject bubbleprefab;
+
 	public int lives;
 
 	//AudioScript audioscriptjump;
 	//AudioScript audioscriptcollectcoin;
+	private 
 
 
 
@@ -47,6 +52,7 @@ public class Player : MonoBehaviour {
 		myRigidbody = GetComponent<Rigidbody2D>();
 		myAnimator = GetComponent<Animator> ();
 		gm = GameObject.Find("GameManager").GetComponent<GameMaster> ();
+		//gm = GameObject.Find ("endLevel").GetComponent<GameMaster> ();
 		lives = 5;
 		//audioscriptjump =GameObject.Find("AudioObject").GetComponent<AudioScript> ();
 		//audioscriptcollectcoin =GameObject.Find("AudioObject").GetComponent<AudioScript>();
@@ -104,6 +110,7 @@ public class Player : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
 			myAnimator.SetTrigger ("throw");
+			Throwbubble (0);
 		}
 	}
 
@@ -128,7 +135,8 @@ public class Player : MonoBehaviour {
 				for (int i = 0; i < colliders.Length; i++) {
 					if (colliders [i].gameObject != gameObject) {
 						myAnimator.ResetTrigger ("jump");
-
+						myAnimator.ResetTrigger ("throw");
+						myAnimator.SetBool ("land",false);
 						return true;
 					}
 				}
@@ -145,6 +153,18 @@ public class Player : MonoBehaviour {
 			}
 		
 		}
+	public void Throwbubble(int value){
+		if (!isGrounded && value == 1 || isGrounded && value == 0) {
+			if (facingRight) {
+				GameObject tmp=(GameObject)Instantiate (bubbleprefab, transform.position, Quaternion.identity);
+				tmp.GetComponent<shootBubble> ().Initialize (Vector2.right);
+			} else {
+				GameObject tmp=(GameObject)Instantiate (bubbleprefab, transform.position, Quaternion.identity);
+				tmp.GetComponent<shootBubble> ().Initialize (Vector2.left);
+			}
+		}
+
+	}
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "coin") {
 			gm.coinCollected ();
@@ -155,6 +175,11 @@ public class Player : MonoBehaviour {
 			
 			AudioScript.PlaySound ("jump");
 			Destroy (other.gameObject);
+		}
+		if (other.tag == "endLevel") {
+			
+			StartCoroutine (coolDown());
+
 		}
 		if (other.tag == "die") {
 			
@@ -181,6 +206,14 @@ public class Player : MonoBehaviour {
 		myAnimator.SetBool ("die", false);
 
 		myRigidbody.MovePosition (new Vector2(10,6));
+
+
+	}
+	IEnumerator coolDown()
+	{
+		yield return new WaitForSeconds (2);
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
+
 
 
 	}
