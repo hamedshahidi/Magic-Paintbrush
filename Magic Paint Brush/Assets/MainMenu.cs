@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
-	public GameObject pausedMenu;
+
+    public static bool GameIsPaused = false;
+    public GameObject pausedMenu;
 
 
 
@@ -15,16 +17,18 @@ public class MainMenu : MonoBehaviour {
 	}
 	void Update(){
 		
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			
-				pausedMenu.SetActive (true);
-
-
-
-
-
-		}
-	}
+		if (Input.GetKeyDown (KeyCode.Escape))
+        {
+            if (GameIsPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+    }
 
 	public void PlayGame(){
 		//Conversationscript.handleConversation ();
@@ -42,13 +46,28 @@ public class MainMenu : MonoBehaviour {
 	}
 
 
-     public void Continue()
+    public void ResumeGame()
     {
-		
+        pausedMenu.SetActive(false);
+        Time.timeScale = 1f;
+        GameIsPaused = false;
 
     }
 
-	IEnumerator coolDown()
+    void PauseGame()
+    {
+        pausedMenu.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("StartUp");
+    }
+
+    IEnumerator coolDown()
 	{
 		
 		yield return new WaitForSeconds (2);
