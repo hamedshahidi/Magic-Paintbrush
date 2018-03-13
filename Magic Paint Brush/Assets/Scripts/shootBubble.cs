@@ -11,6 +11,11 @@ public class shootBubble : MonoBehaviour {
 	private Vector2 direction;
 	private bool shoot;
 	public GameObject bubble;
+	[SerializeField]
+	private GameObject bubbleprefab;
+
+	public GameObject bubbleanimationObject;
+
 
 
 	// Use this for initialization
@@ -39,12 +44,18 @@ public class shootBubble : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 
-		if (other.tag == "die") {
-			
+		if (other.tag == "makefree") {
 
 			AudioScript.PlaySound ("coin");
-			EnemiesScript.flyEniemies (other.gameObject.GetComponent<Rigidbody2D>());
-			StartCoroutine (waitforEnemyDestroy(other.gameObject));
+			//Destroy (other.gameObject);
+			other.gameObject.GetComponent<Rigidbody2D>().gravityScale=-1;
+			other.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+			other.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+
+			//GameObject tmp=(GameObject)Instantiate (bubbleprefab, transform.position, Quaternion.identity);
+			//tmp.GetComponent<shootBubble> ().Initialize (Vector2.down);
+
+
 
 		}
 
@@ -60,6 +71,7 @@ public class shootBubble : MonoBehaviour {
 	{
 		myRidigbody.velocity = direction * speed;
 		yield return new WaitForSeconds (1);
+		Destroy (myRidigbody);
 		shoot = false;
 
 	}
@@ -67,7 +79,7 @@ public class shootBubble : MonoBehaviour {
 	IEnumerator waitforEnemyDestroy(GameObject other)
 	{
 		
-		yield return new WaitForSeconds (1);
+		yield return new WaitForSeconds (2);
 		Destroy(other.gameObject);
 
 	}

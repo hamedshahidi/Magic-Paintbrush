@@ -180,6 +180,7 @@ public class GamePlayer : MonoBehaviour {
 			myAnimator.SetLayerWeight (1, 1);
 		}else{
 			myAnimator.SetLayerWeight (1, 0);
+			myAnimator.SetBool ("land", false);
 
 		}
 
@@ -243,20 +244,22 @@ public class GamePlayer : MonoBehaviour {
 			StartCoroutine (coolDown());
 
 		}
+		if (other.tag == "squish") {
+
+			AudioScript.PlaySound ("coin");
+
+		}
 		if (other.tag == "die") {
-
-			myAnimator.SetBool ("die", true);
 			lives--;
-
-			if (lives > 0) {
-
+			int i = 0;
+			if (i < 1) {
+				myAnimator.SetBool ("die", true);
 				StartCoroutine (LateCall());
+				i++;
 
-			} else {
-				myRigidbody.MovePosition (new Vector2(10,6));
 			}
-			AudioScript.PlaySound ("jump");
-			//Destroy (other.gameObject);
+			GameMaster.death (lives);
+
 		}
 			
 
@@ -281,11 +284,10 @@ public class GamePlayer : MonoBehaviour {
 
 
 	IEnumerator LateCall()
-	{	myAnimator.SetBool ("die", false);
-		yield return new WaitForSeconds (2);
-
-		myAnimator.SetBool ("idle", true);
-
+	{	
+		yield return new WaitForSeconds (4);
+		myAnimator.SetBool ("die", false);
+	
 		myRigidbody.MovePosition (new Vector2(10,6));
 
 

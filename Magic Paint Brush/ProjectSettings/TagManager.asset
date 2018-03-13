@@ -18,6 +18,10 @@ TagManager:
   - Paint
   - breakBigmonster
   - bigmonster
+  - colliderleft
+  - colliderright
+  - makefree
+  - squish
   layers:
   - Default
   - TransparentFX

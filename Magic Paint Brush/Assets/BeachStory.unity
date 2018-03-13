@@ -202,7 +202,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!1 &53259396
 GameObject:
@@ -657,7 +657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &229274577
 Transform:
   m_ObjectHideFlags: 0
@@ -1103,7 +1103,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: dead169a7d21f4f33afc5f3d4ef628c7, type: 3}
+  m_Texture: {fileID: 2800000, guid: d3c5ed96b538640b1bb4f30c6747922a, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1148,8 +1148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0735, y: 0}
-  m_SizeDelta: {x: 1.883, y: 2.0046}
+  m_AnchoredPosition: {x: 0.0465, y: -0.0037}
+  m_SizeDelta: {x: 2.0809, y: 2.0622}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569444802
 MonoBehaviour:
@@ -1170,7 +1170,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: dead169a7d21f4f33afc5f3d4ef628c7, type: 3}
+  m_Texture: {fileID: 2800000, guid: d3c5ed96b538640b1bb4f30c6747922a, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1551,7 +1551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &746689428
 Transform:
   m_ObjectHideFlags: 0
@@ -4429,8 +4429,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1.704, y: 1.566}
+  m_AnchoredPosition: {x: -0.058, y: -0.000000067055}
+  m_SizeDelta: {x: 2.124, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031520836
 MonoBehaviour:
@@ -4451,7 +4451,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: dead169a7d21f4f33afc5f3d4ef628c7, type: 3}
+  m_Texture: {fileID: 2800000, guid: d3c5ed96b538640b1bb4f30c6747922a, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

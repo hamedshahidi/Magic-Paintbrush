@@ -109,6 +109,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   bubble: {fileID: 1465916061808728}
+  bubbleprefab: {fileID: 1075860596182578, guid: 0dbb0bb8e487e4896973f980732e0ed4,
+    type: 2}
+  bubbleanimationObject: {fileID: 1246037164773580, guid: 76121415c4020439cb6eddd8ac928058,
+    type: 2}
 --- !u!212 &212681285010679052
 SpriteRenderer:
   m_ObjectHideFlags: 1
